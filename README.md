@@ -6,9 +6,8 @@
 <img src="https://img.shields.io/badge/RAGFlow-0.18.0-green" />
 <img src="https://img.shields.io/badge/License-Apache--2.0-lightgrey" />
 </div>
-简介
-RAG 论文研读助手是面向 CV 研究者的本地部署智能问答系统，基于 RAGFlow 深度优化，专注解决学术论文阅读效率低、信息检索难、跨论文对比困难等问题。
-专为学术场景定制解析、切片、检索方案，支持公式 / 表格精准识别与溯源，单卡 GPU 即可稳定运行。
+简介RAG 论文研读助手是面向 CV 研究者的本地部署智能问答系统，基于 RAGFlow 深度优化，专注解决学术论文阅读效率低、信息检索难、跨论文对比困难等问题。
+专为学术场景定制解析、切片、检索方案，支持公式 / 表格精准识别与溯源，单卡 GPU（调用API的形式，本地化部署建议使用GPU） 即可稳定运行。
 
 核心优化与效果
 优化环节	基线方案 (类 RAGFlow 通用配置)	本实现方案	量化收益
@@ -22,20 +21,24 @@ MRR 0.62 → 0.75
 明显幻觉案例 ↓60%
 
 环境要求
-CPU ≥ 4 核 | 内存 ≥ 16GB | 磁盘 ≥ 50GB
-Docker ≥ 24.0.0 & Docker Compose ≥ v2.26.1
-GPU（可选）：RTX 3090 及以上
-快速启动
+CPU >= 4 核(GPU)
+RAM >= 16 GB
+Disk >= 50 GB
+Docker >= 24.0.0 & Docker Compose >= v2.26.1
+gVisor: 仅在你打算使用 RAGFlow 的代码执行器（沙箱）功能时才需要安装。
+
+# 快速启动
 1. 克隆项目
 bash
-运行
+$ git clone https://github.com/infiniflow/ragflow.git
 git clone https://github.com/735166094/rag-paper-assistant.git
 cd rag-paper-assistant
-2. 系统配置（必需）
+1. 系统配置（必需）
 bash
 运行
 # 设置内存参数
 sudo sysctl -w vm.max_map_count=262144
+
 3. 启动服务
 bash
 运行
@@ -46,15 +49,18 @@ docker compose -f docker-compose.yml up -d
 
 # GPU 版本
 # docker compose -f docker-compose-gpu.yml up -d
+
 4. 访问系统
 浏览器打开：http://localhost
 注册账号 → 配置 LLM 模型 → 上传论文开始使用
+
 核心特性
 📄 学术文档增强解析：公式 LaTeX 保留率 90%+，完整识别表格 / 图表
 🎯 论文专用切片策略：按算法步骤细切，实验数据完整保留
 🔍 混合检索架构：向量检索 + 关键词检索 + BGE 重排序
 ✅ 低幻觉 + 溯源：答案引用原文片段，支持人工校验
 🚀 轻量容器化：CPU/GPU 一键部署，本地隐私安全
+
 项目结构
 plaintext
 rag-paper-assistant/
