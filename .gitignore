@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+venv/
+env/
+.env
+.venv
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 数据文件
+*.pdf
+*.png
+*.jpg
+*.jpeg
+data/
+cache/
+index/
+
+# 日志
+*.log
+logs/
+
+# 模型文件
+*.bin
+*.pt
+*.pth
+*.onnx
+
+# 系统
+.DS_Store
+Thumbs.db

@@ -1,0 +1,62 @@
+# config/settings.py
+"""
+全局配置
+"""
+
+import os
+from pathlib import Path
+
+# 项目根目录
+ROOT_DIR = Path(__file__).parent.parent.absolute()
+
+# 数据目录
+DATA_DIR = ROOT_DIR / "data"
+CACHE_DIR = DATA_DIR / "cache"
+INDEX_DIR = DATA_DIR / "index"
+os.makedirs(DATA_DIR, exist_ok=True)
+os.makedirs(CACHE_DIR, exist_ok=True)
+os.makedirs(INDEX_DIR, exist_ok=True)
+
+# 模型配置
+EMBEDDING_MODEL = "Dmeta-embedding-zh"
+RERANKER_MODEL = "BAAI/bge-reranker-v2-m3"
+LLM_MODEL = "qwen2:7b"
+
+# 设备配置
+DEVICE = "cuda"  # 或 "cpu"
+
+# 解析配置
+PARSER_CONFIG = {
+    "use_ocr": True,
+    "use_latex": True,
+    "min_image_size": 100,  # 最小图片尺寸（公式过滤）
+}
+
+# 切片配置
+CHUNKER_CONFIG = {
+    "min_chunk_size": 256,
+    "max_chunk_size": 1024,
+    "overlap": 64,
+}
+
+# 检索配置
+RETRIEVER_CONFIG = {
+    "vector_weight": 0.6,
+    "keyword_weight": 0.4,
+    "rerank_top_k": 30,
+}
+
+# API配置
+API_CONFIG = {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "redis_url": "redis://localhost:6379",
+    "ollama_url": "http://localhost:11434",
+    "max_concurrent_ollama": 5,
+}
+
+# 缓存配置
+CACHE_CONFIG = {
+    "default_ttl": 3600,  # 1小时
+    "high_confidence_ttl": 7200,  # 高置信度缓存2小时
+}
